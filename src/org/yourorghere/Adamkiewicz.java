@@ -81,28 +81,29 @@ public class Adamkiewicz implements GLEventListener {
         gl.glLoadIdentity();
     }
 
-    public void display(GLAutoDrawable drawable) {
-//Tworzenie obiektu
-        GL gl = drawable.getGL();
-//Czyszczenie przestrzeni 3D przed utworzeniem kolejnej klatki
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-        //Resetowanie macierzy transformacji
-        gl.glLoadIdentity();
-
-        //kolo
-        float x, y, kat;
+    public void drawTriangleFan(float xsr, float ysr, float r, GL gl) {
+        float kat;
         gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f, 0.0f, -6.0f); //œrodek
+        gl.glVertex3f(xsr, ysr, -6.0f);
         for (kat = 0.0f; kat < (2.0f * Math.PI);
                 kat += (Math.PI / 32.0f)) {
-            x = 0.5f * (float) Math.sin(kat);
-            y = 0.5f * (float) Math.cos(kat);
-            gl.glVertex3f(x, y, -6.0f); //kolejne punkty
+            float x = r * (float) Math.sin(kat) + xsr;
+            float y = r * (float) Math.cos(kat) + ysr;
 
+            gl.glVertex3f(x, y, -6.0f);
         }
-        gl.glEnd();
+    }
 
-        //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
+    public void display(GLAutoDrawable drawable) {
+        //Tworzenie obiektu
+
+        GL gl = drawable.getGL();
+
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        gl.glLoadIdentity();
+        drawTriangleFan((float) 0.0, (float) 0.0, (float) 1.5, gl);
+
+        gl.glEnd();
         gl.glFlush();
     }
 
