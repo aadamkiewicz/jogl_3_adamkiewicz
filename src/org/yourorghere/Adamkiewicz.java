@@ -95,6 +95,13 @@ public class Adamkiewicz implements GLEventListener {
         gl.glVertex3f(0.0f, -1.0f, -6.0f);
         gl.glEnd();
 
+        gl.glBegin(GL.GL_QUADS);
+        gl.glVertex3f(1.0f, 1.0f, -6.0f);
+        gl.glVertex3f(3.0f, 1.0f, -6.0f);
+        gl.glVertex3f(3.0f, -1.0f, -6.0f);
+        gl.glVertex3f(1.0f, -1.0f, -6.0f);
+        gl.glEnd();
+
         //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
         gl.glFlush();
     }
