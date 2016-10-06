@@ -97,8 +97,8 @@ public class Adamkiewicz implements GLEventListener {
 
         gl.glBegin(GL.GL_QUADS);
         gl.glVertex3f(1.0f, 1.0f, -6.0f);
-        gl.glVertex3f(3.0f, 1.0f, -6.0f);
-        gl.glVertex3f(3.0f, -1.0f, -6.0f);
+        gl.glVertex3f(2.0f, 1.0f, -6.0f);
+        gl.glVertex3f(2.0f, -1.0f, -6.0f);
         gl.glVertex3f(1.0f, -1.0f, -6.0f);
         gl.glEnd();
 
