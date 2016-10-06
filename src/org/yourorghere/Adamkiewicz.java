@@ -91,18 +91,40 @@ public class Adamkiewicz implements GLEventListener {
 
         //trojkat
         gl.glBegin(GL.GL_TRIANGLES);
+        gl.glColor3f(1.0f, 0.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, -6.0f);
         gl.glVertex3f(-2.0f, -1.0f, -6.0f);
         gl.glVertex3f(0.0f, -1.0f, -6.0f);
         gl.glEnd();
 
-        //kwadrat
+        //prostokat
         gl.glBegin(GL.GL_QUADS);
-        gl.glVertex3f(1.0f, 1.0f, -8.0f);
-        gl.glVertex3f(2.0f, 1.0f, -8.0f);
-        gl.glVertex3f(2.0f, -1.0f, -8.0f);
-        gl.glVertex3f(1.0f, -1.0f, -8.0f);
+        gl.glColor3f(0.0f, 0.0f, 1.0f);
+        gl.glVertex3f(0.0f, -1.0f, -6.0f);
+        gl.glVertex3f(-2.0f, -1.0f, -6.0f);
+        gl.glVertex3f(-2.0f, -3.0f, -6.0f);
+        gl.glVertex3f(0.0f, -3.0f, -6.0f);
         gl.glEnd();
+
+        //okno
+        gl.glBegin(GL.GL_QUADS);
+        gl.glColor3f(0.0f, 0.5f, 0.0f);
+        gl.glVertex3f(-0.75f, -4.0f, -20.0f);
+        gl.glVertex3f(-2.25f, -4.0f, -20.0f);
+        gl.glVertex3f(-2.25f, -6.0f, -20.0f);
+        gl.glVertex3f(-0.75f, -6.0f, -20.0f);
+        gl.glEnd();
+
+        //okno
+        gl.glBegin(GL.GL_QUADS);
+        gl.glColor3f(0.0f, 0.5f, 0.0f);
+        gl.glVertex3f(-4.20f, -4.0f, -20.0f);
+        gl.glVertex3f(-5.70f, -4.0f, -20.0f);
+        gl.glVertex3f(-5.70f, -6.0f, -20.0f);
+        gl.glVertex3f(-4.20f, -6.0f, -20.0f);
+        gl.glEnd();
+        
+        
 
         //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
         gl.glFlush();
