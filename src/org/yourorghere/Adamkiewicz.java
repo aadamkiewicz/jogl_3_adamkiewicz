@@ -89,17 +89,19 @@ public class Adamkiewicz implements GLEventListener {
         //Resetowanie macierzy transformacji
         gl.glLoadIdentity();
 
+        //trojkat
         gl.glBegin(GL.GL_TRIANGLES);
         gl.glVertex3f(-1.0f, 1.0f, -6.0f);
         gl.glVertex3f(-2.0f, -1.0f, -6.0f);
         gl.glVertex3f(0.0f, -1.0f, -6.0f);
         gl.glEnd();
 
+        //kwadrat
         gl.glBegin(GL.GL_QUADS);
-        gl.glVertex3f(1.0f, 1.0f, -6.0f);
-        gl.glVertex3f(2.0f, 1.0f, -6.0f);
-        gl.glVertex3f(2.0f, -1.0f, -6.0f);
-        gl.glVertex3f(1.0f, -1.0f, -6.0f);
+        gl.glVertex3f(1.0f, 1.0f, -8.0f);
+        gl.glVertex3f(2.0f, 1.0f, -8.0f);
+        gl.glVertex3f(2.0f, -1.0f, -8.0f);
+        gl.glVertex3f(1.0f, -1.0f, -8.0f);
         gl.glEnd();
 
         //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
