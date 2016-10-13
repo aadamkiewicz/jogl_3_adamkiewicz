@@ -140,44 +140,69 @@ public class Adamkiewicz implements GLEventListener {
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
 
-        gl.glBegin(GL.GL_QUADS);
-//œciana przednia
+        gl.glBegin(GL.GL_TRIANGLES);
+//pierwszy bok          
         gl.glColor3f(1.0f, 0.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
 
-//sciana tylnia
+//drugi bok
         gl.glColor3f(0.0f, 1.0f, 0.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-//œciana lewa
-        gl.glColor3f(0.0f, 0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-//œciana prawa
+//trzeci bok
         gl.glColor3f(1.0f, 1.0f, 0.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
+
+//czwarty bok
+        gl.glColor3f(1.0f, 0.0f, 0.0f);
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glEnd();
+
+        gl.glBegin(GL.GL_QUADS);
 //œciana dolna
         gl.glColor3f(1.0f, 0.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
+
+//œciana przednia
+//        gl.glColor3f(1.0f, 0.0f, 0.0f);
+//        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+//        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+//        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+//        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+//sciana tylnia
+//        gl.glColor3f(0.0f, 1.0f, 0.0f);
+//        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+//        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+//        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+//        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+//œciana lewa
+//        gl.glColor3f(0.0f, 0.0f, 1.0f);
+//        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+//        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+//        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+//        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+//œciana prawa
+//        gl.glColor3f(1.0f, 1.0f, 0.0f);
+//        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+//        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+//        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+//        gl.glVertex3f(1.0f, -1.0f, -1.0f);
 //œciana gorna      
-        gl.glColor3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+//        gl.glColor3f(1.0f, 1.0f, 1.0f);
+//        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+//        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+//        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+//        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glEnd();
 
     }
