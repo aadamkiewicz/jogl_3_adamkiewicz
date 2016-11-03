@@ -25,6 +25,10 @@ import javax.media.opengl.glu.GLU;
 public class Adamkiewicz implements GLEventListener {
 
     private static float xrot = 0.0f, yrot = 0.0f;
+    static float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat³o otaczaj¹ce
+    static float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//œwiat³o rozproszone
+    static float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //œwiat³o odbite
+    static float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja œwiat³a
 
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
@@ -65,6 +69,43 @@ public class Adamkiewicz implements GLEventListener {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     yrot -= 1.0f;
                 }
+
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    xrot -= 1.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    xrot += 1.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    yrot += 1.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    yrot -= 1.0f;
+                }
+                if (e.getKeyChar() == 'q') {
+                    ambientLight = new float[]{ambientLight[0] - 0.1f, ambientLight[0] - 0.1f, ambientLight[0] - 0.1f};
+                }
+                if (e.getKeyChar() == 'w') {
+                    ambientLight = new float[]{ambientLight[0] + 0.1f, ambientLight[0] + 0.1f, ambientLight[0] + 0.1f};
+                }
+                if (e.getKeyChar() == 'a') {
+                    diffuseLight = new float[]{diffuseLight[0] - 0.1f, diffuseLight[0] - 0.1f, diffuseLight[0] - 0.1f};
+                }
+                if (e.getKeyChar() == 's') {
+                    diffuseLight = new float[]{diffuseLight[0] + 0.1f, diffuseLight[0] + 0.1f, diffuseLight[0] + 0.1f};
+                }
+                if (e.getKeyChar() == 'z') {
+                    specular = new float[]{specular[0] - 0.1f, specular[0] - 0.1f, specular[0] - 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'x') {
+                    specular = new float[]{specular[0] + 0.1f, specular[0] + 0.1f, specular[0] + 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'n') {
+                    lightPos[3] = 0;
+                }
+                if (e.getKeyChar() == 'm') {
+                    lightPos[3] = 1;
+                }
             }
 
             public void keyReleased(KeyEvent e) {
@@ -93,12 +134,12 @@ public class Adamkiewicz implements GLEventListener {
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
         gl.glEnable(GL.GL_CULL_FACE);
-
-        //wartoœci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
         float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat³o otaczaj¹ce
         float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//œwiat³o rozproszone
         float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //œwiat³o odbite
         float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja œwiat³a
+
+        //wartoœci sk³adowe oœwietlenia i koordynaty Ÿród³a œwiat³a
 //(czwarty parametr okreœla odleg³oœæ Ÿród³a:
 //0.0f-nieskoñczona; 1.0f-okreœlona przez pozosta³e parametry)
         gl.glEnable(GL.GL_LIGHTING); //uaktywnienie oœwietlenia
@@ -159,6 +200,13 @@ public class Adamkiewicz implements GLEventListener {
     //  }
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
+        gl.glEnable(GL.GL_LIGHTING);
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat³o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0); //?wiat³o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0); //?wiat³o odbite
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPos, 0); //pozycja ?wiat³a
+
+        // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
