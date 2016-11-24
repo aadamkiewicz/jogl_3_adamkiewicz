@@ -21,6 +21,7 @@ public class Adamkiewicz implements GLEventListener {
     public static float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//?wiat?o rozproszone
     public static float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
     public static float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
+    static float licznik = 0.1f;
 
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
@@ -112,7 +113,7 @@ public class Adamkiewicz implements GLEventListener {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
                     koparka.kond4 -= (1.5f);
-                    koparka.kond += (1.5f);
+
                     if (koparka.kond4 < -60.0f) {
                         koparka.kond4 = -60.0f;
                     }
@@ -210,9 +211,27 @@ public class Adamkiewicz implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
+        koparka.kond += licznik;
+        if (koparka.kond > 60.0f) {
+            koparka.kond = 60.0f;
+            licznik *= (-1);
+        }
 
-        // Clear the drawing area
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        if (koparka.kond < -60.0f) {
+            licznik *= (-1);
+        }
+
+        koparka.kond2 += licznik;
+        if (koparka.kond2 > 50.0f) {
+            koparka.kond2 = 50.0f;
+            licznik *= (-1);
+
+        }
+        if (koparka.kond2 < -50.0f) 
+// Clear the drawing area
+        {
+            gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        }
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
         gl.glTranslatef(0.0f, 0.0f, -20.0f); //przesuni?cie o 6 jednostek
@@ -343,7 +362,8 @@ public class Adamkiewicz implements GLEventListener {
         //drzewko      
     }
 
-    void drzewko(GL gl) {
+    void drzewko(GL gl
+    ) {
         gl.glPushMatrix();
         gl.glColor3f(0.0f, 1.0f, 0.0f);
         stozek(gl);
@@ -363,7 +383,8 @@ public class Adamkiewicz implements GLEventListener {
         gl.glPopMatrix();
     }
 
-    void walec(GL gl) {
+    void walec(GL gl
+    ) {
 //wywo?ujemy automatyczne normalizowanie normalnych
 //bo operacja skalowania je zniekszta?ci
         gl.glEnable(GL.GL_NORMALIZE);
@@ -399,7 +420,8 @@ public class Adamkiewicz implements GLEventListener {
         gl.glEnd();
     }
 
-    void stozek(GL gl) {
+    void stozek(GL gl
+    ) {
 //wywo?ujemy automatyczne normalizowanie normalnych
         gl.glEnable(GL.GL_NORMALIZE);
         float x, y, kat;
