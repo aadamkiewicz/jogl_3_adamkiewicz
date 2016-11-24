@@ -62,6 +62,61 @@ public class Adamkiewicz implements GLEventListener {
                     yrot -= 1.0f;
                 }
 
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
+                    koparka.kond += (1.5f);
+                    if (koparka.kond > 60.0f) {
+                        koparka.kond = 60.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
+                    koparka.kond -= (1.5f);
+
+                    if (koparka.kond < -50.0f) {
+                        koparka.kond = -50.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
+                    koparka.kond2 += (1.5f);
+
+                    if (koparka.kond2 > 50.0f) {
+                        koparka.kond2 = 50.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
+                    koparka.kond2 -= (1.5f);
+
+                    if (koparka.kond2 < -120.0f) {
+                        koparka.kond2 = -120.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
+                    koparka.kond3 += (1.5f);
+
+                    if (koparka.kond3 > 10.0f) {
+                        koparka.kond3 = 10.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
+                    koparka.kond3 -= (1.5f);
+
+                    if (koparka.kond3 < -190.0f) {
+                        koparka.kond3 = -190.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
+                    koparka.kond4 += (1.5f);
+
+                    if (koparka.kond4 > 60.0f) {
+                        koparka.kond4 = 60.0f;
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
+                    koparka.kond4 -= (1.5f);
+                    koparka.kond += (1.5f);
+                    if (koparka.kond4 < -60.0f) {
+                        koparka.kond4 = -60.0f;
+                    }
+                }
                 if (e.getKeyChar() == 'q') {
                     ambientLight = new float[]{ambientLight[0] - 0.1f, ambientLight[1] - 0.1f, ambientLight[2] - 0.1f, ambientLight[3] - 0.01f};
                 }
