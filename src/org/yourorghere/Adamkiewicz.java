@@ -1,16 +1,22 @@
 package org.yourorghere;
 
 import com.sun.opengl.util.Animator;
+import com.sun.opengl.util.texture.Texture;
+import com.sun.opengl.util.texture.TextureIO;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import javax.swing.JOptionPane;
 
 public class Adamkiewicz implements GLEventListener {
 //statyczne pola okre?laj?ce rotacj? wokó? osi X i Y
@@ -22,6 +28,8 @@ public class Adamkiewicz implements GLEventListener {
     public static float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
     public static float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
     static float licznik = 0.1f;
+    static BufferedImage image1 = null, image2 = null;
+    static Texture t1 = null, t2 = null;
 
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
@@ -190,6 +198,24 @@ public class Adamkiewicz implements GLEventListener {
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
         koparka = new Koparka();
+
+        try {
+            image1 = ImageIO.read(getClass().getResourceAsStream("/android.jpg"));
+            image2 = ImageIO.read(getClass().getResourceAsStream("/pokemon.jpg"));
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(null, exc.toString());
+            return;
+        }
+
+        t1 = TextureIO.newTexture(image1, false);
+        t2 = TextureIO.newTexture(image2, false);
+        gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE,
+                GL.GL_BLEND | GL.GL_MODULATE);
+        gl.glEnable(GL.GL_TEXTURE_2D);
+        gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
+        gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
+        gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
+        gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -227,14 +253,13 @@ public class Adamkiewicz implements GLEventListener {
             licznik *= (-1);
 
         }
-        if (koparka.kond2 < -50.0f) 
-// Clear the drawing area
+        if (koparka.kond2 < -50.0f) // Clear the drawing area
         {
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         }
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
-        gl.glTranslatef(0.0f, 0.0f, -20.0f); //przesuni?cie o 6 jednostek
+        gl.glTranslatef(0.0f, 0.0f, -5.0f); //przesuni?cie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
 
@@ -246,7 +271,7 @@ public class Adamkiewicz implements GLEventListener {
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPos, 0); //pozycja ?wiat?a
         gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród?a ?wiat?a nr. 0
         gl.glEnable(GL.GL_COLOR_MATERIAL);
-        koparka.Rysuj(gl);
+        //koparka.Rysuj(gl);
         // drzewko(gl);
         //  for(int i=0; i<10 ;i++)
         //  {
@@ -255,45 +280,71 @@ public class Adamkiewicz implements GLEventListener {
         //      drzewko(gl);
         //     gl.glTranslatef(-4.0f, 4.0f, 0.0f);
         //  }
-//gl.glBegin(GL.GL_QUADS);
-////?ciana przednia
-//gl.glColor3f(1.0f,0.0f,0.0f);
-//gl.glVertex3f(-1.0f,-1.0f,1.0f);
-//gl.glVertex3f(1.0f,-1.0f,1.0f);
-//gl.glVertex3f(1.0f,1.0f,1.0f);
-//gl.glVertex3f(-1.0f,1.0f,1.0f);
-////sciana tylnia
-//gl.glColor3f(0.0f,1.0f,0.0f);
-//gl.glVertex3f(-1.0f,1.0f,-1.0f);
-//gl.glVertex3f(1.0f,1.0f,-1.0f);
-//gl.glVertex3f(1.0f,-1.0f,-1.0f);
-//gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-////?ciana lewa
-//gl.glColor3f(0.0f,0.0f,1.0f);
-//gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-//gl.glVertex3f(-1.0f,-1.0f,1.0f);
-//gl.glVertex3f(-1.0f,1.0f,1.0f);
-//gl.glVertex3f(-1.0f,1.0f,-1.0f);
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
+//?ciana przednia
+        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+//sciana tylnia
+
+        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glEnd();
+//?ciana lewa
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
+        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
 ////?ciana prawa
-//gl.glColor3f(1.0f,1.0f,0.0f);
-//gl.glVertex3f(1.0f,1.0f,-1.0f);
-//gl.glVertex3f(1.0f,1.0f,1.0f);
-//gl.glVertex3f(1.0f,-1.0f,1.0f);
-//gl.glVertex3f(1.0f,-1.0f,-1.0f);
+        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
 ////?ciana dolna
-//gl.glColor3f(1.0f,0.0f,1.0f);
-//gl.glVertex3f(-1.0f,-1.0f,1.0f);
-//gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-//gl.glVertex3f(1.0f,-1.0f,-1.0f);
-//gl.glVertex3f(1.0f,-1.0f,1.0f);
+
+        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
 //
 ////?ciana górna
-//gl.glColor3f(1.0f,0.0f,1.0f);
-//gl.glVertex3f(-1.0f,1.0f,1.0f);
-//gl.glVertex3f(1.0f,1.0f,1.0f);
-//gl.glVertex3f(1.0f,1.0f,-1.0f);
-//gl.glVertex3f(-1.0f,1.0f,-1.0f);
-//gl.glEnd();
+
+        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glEnd();
+
 //ostroslup
 // gl.glBegin(GL.GL_QUADS);
 // gl.glColor3f(0.0f,0.5f,1.0f);
