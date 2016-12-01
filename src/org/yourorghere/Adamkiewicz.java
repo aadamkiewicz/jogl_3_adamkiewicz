@@ -373,116 +373,124 @@ public class Adamkiewicz implements GLEventListener {
 
 //ostroslup
         //sciana dolna
-        gl.glBegin(GL.GL_QUADS);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
-        gl.glTexCoord2f(0, 1);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glTexCoord2f(0, 0);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glTexCoord2f(1, 0);
-        gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        gl.glTexCoord2f(1, 1);
-        gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glEnd();
-        //scianka1
-        gl.glBegin(GL.GL_TRIANGLES);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
-        float[] scianka1 = {-1.0f, -1.0f, 1.0f, //wpó?rz?dne pierwszego punktu
-            1.0f, -1.0f, 1.0f, //wspó?rz?dne drugiego punktu
-            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
-        float[] normalna1 = Norm(scianka1, 0, 3, 6);
-        gl.glNormal3fv(normalna1, 0);
-        gl.glTexCoord2f(0, 1);
-        gl.glVertex3fv(scianka1, 0);
-        gl.glTexCoord2f(1, 1);
-        gl.glVertex3fv(scianka1, 3);
-        gl.glTexCoord2f(0, 0);
-        gl.glVertex3fv(scianka1, 6);
-        gl.glEnd();
-        //scianka2
-        gl.glBegin(GL.GL_TRIANGLES);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
-        float[] scianka2 = {1.0f, -1.0f, -1.0f, //wpó?rz?dne pierwszego punktu
-            -1.0f, -1.0f, -1.0f, //wspó?rz?dne drugiego punktu
-            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
-        float[] normalna2 = Norm(scianka2, 0, 3, 6);
+//        gl.glBegin(GL.GL_QUADS);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+//        gl.glTexCoord2f(0, 1);
+//        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+//        gl.glTexCoord2f(0, 0);
+//        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+//        gl.glTexCoord2f(1, 0);
+//        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+//        gl.glTexCoord2f(1, 1);
+//        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+//        gl.glEnd();
+//        //scianka1
+//        gl.glBegin(GL.GL_TRIANGLES);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+//        float[] scianka1 = {-1.0f, -1.0f, 1.0f, //wpó?rz?dne pierwszego punktu
+//            1.0f, -1.0f, 1.0f, //wspó?rz?dne drugiego punktu
+//            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
+//        float[] normalna1 = Norm(scianka1, 0, 3, 6);
+//        gl.glNormal3fv(normalna1, 0);
+//        gl.glTexCoord2f(0, 1);
+//        gl.glVertex3fv(scianka1, 0);
+//        gl.glTexCoord2f(1, 1);
+//        gl.glVertex3fv(scianka1, 3);
+//        gl.glTexCoord2f(0, 0);
+//        gl.glVertex3fv(scianka1, 6);
+//        gl.glEnd();
+//        //scianka2
+//        gl.glBegin(GL.GL_TRIANGLES);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+//        float[] scianka2 = {1.0f, -1.0f, -1.0f, //wpó?rz?dne pierwszego punktu
+//            -1.0f, -1.0f, -1.0f, //wspó?rz?dne drugiego punktu
+//            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
+//        float[] normalna2 = Norm(scianka2, 0, 3, 6);
+//
+//        gl.glNormal3fv(normalna2, 0);
+//        gl.glTexCoord2f(0, 1);
+//        gl.glVertex3fv(scianka2, 0);            //wspó?rz?dne 1go 
+//        gl.glTexCoord2f(1, 1);
+//        gl.glVertex3fv(scianka2, 3);            //wspó?rz?dne 2go 
+//        gl.glTexCoord2f(0, 0);
+//        gl.glVertex3fv(scianka2, 6);            //wspó?rz?dne 3go 
+//        gl.glEnd();
+//        //scianka3
+//        gl.glBegin(GL.GL_TRIANGLES);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+//        float[] scianka3 = {-1.0f, -1.0f, -1.0f,//wpó?rz?dne pierwszego punktu
+//            -1.0f, -1.0f, 1.0f, //wspó?rz?dne drugiego punktu
+//            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
+//        float[] normalna3 = Norm(scianka3, 0, 3, 6);
+//
+//        gl.glNormal3fv(normalna3, 0);
+//        gl.glTexCoord2f(0, 1);
+//        gl.glVertex3fv(scianka3, 0);            //wspó?rz?dne 1go 
+//        gl.glTexCoord2f(1, 1);
+//        gl.glVertex3fv(scianka3, 3);            //wspó?rz?dne 2go
+//        gl.glTexCoord2f(0, 0);
+//        gl.glVertex3fv(scianka3, 6);             //wspó?rz?dne 3go
+//        gl.glEnd();
+//        //scianka4
+//        gl.glBegin(GL.GL_TRIANGLES);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+//        float[] scianka4 = {1.0f, -1.0f, 1.0f,
+//            1.0f, -1.0f, -1.0f, //wspó?rz?dne drugiego punktu
+//            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
+//        float[] normalna4 = Norm(scianka4, 0, 3, 6);
+//        gl.glTexCoord2f(0, 1);
+//        gl.glNormal3fv(normalna4, 0);
+//        gl.glTexCoord2f(1, 1);
+//        gl.glVertex3fv(scianka4, 0);            //wspó?rz?dne 1go punktu 
+//        gl.glTexCoord2f(1, 1);
+//        gl.glVertex3fv(scianka4, 3);            //wspó?rz?dne 2go punktu 
+//        gl.glVertex3fv(scianka4, 6);            //wspó?rz?dne 3go punktu 
+//        gl.glEnd();
+//        gl.glFlush();
+        //walec
+        float x, y, kat, kat3;
 
-        gl.glNormal3fv(normalna2, 0);
-        gl.glTexCoord2f(0, 1);
-        gl.glVertex3fv(scianka2, 0);            //wspó?rz?dne 1go 
-        gl.glTexCoord2f(1, 1);
-        gl.glVertex3fv(scianka2, 3);            //wspó?rz?dne 2go 
-        gl.glTexCoord2f(0, 0);
-        gl.glVertex3fv(scianka2, 6);            //wspó?rz?dne 3go 
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(1.0f, 1.0f, 0.0f);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //?rodek
+        for (kat = 0.0f; kat < (2.0f * Math.PI);
+                kat += (Math.PI / 32.0f)) {
+            x = 1.0f * (float) Math.sin(kat);
+            y = 1.0f * (float) Math.cos(kat);
+            gl.glNormal3f(x, y, 0.0f);
+            gl.glVertex3f(x, y, 0.0f); //kolejne punkty
+        }
         gl.glEnd();
-        //scianka3
-        gl.glBegin(GL.GL_TRIANGLES);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
-        float[] scianka3 = {-1.0f, -1.0f, -1.0f,//wpó?rz?dne pierwszego punktu
-            -1.0f, -1.0f, 1.0f, //wspó?rz?dne drugiego punktu
-            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
-        float[] normalna3 = Norm(scianka3, 0, 3, 6);
 
-        gl.glNormal3fv(normalna3, 0);
-        gl.glTexCoord2f(0, 1);
-        gl.glVertex3fv(scianka3, 0);            //wspó?rz?dne 1go 
-        gl.glTexCoord2f(1, 1);
-        gl.glVertex3fv(scianka3, 3);            //wspó?rz?dne 2go
-        gl.glTexCoord2f(0, 0);
-        gl.glVertex3fv(scianka3, 6);             //wspó?rz?dne 3go
+        //kolo2
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 2.0f); //?rodek
+        for (kat = (float) (2.0f * Math.PI); kat > 0.0f;
+                kat -= (Math.PI / 32.0f)) {
+            x = 1.0f * (float) Math.sin(kat);
+            y = 1.0f * (float) Math.cos(kat);
+            gl.glNormal3f(x, y, 0.0f);
+            gl.glVertex3f(x, y, 2.0f); //kolejne punkty
+        }
         gl.glEnd();
-        //scianka4
-        gl.glBegin(GL.GL_TRIANGLES);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
-        float[] scianka4 = {1.0f, -1.0f, 1.0f,
-            1.0f, -1.0f, -1.0f, //wspó?rz?dne drugiego punktu
-            0.0f, 1.0f, 0.0f};                  //wspó?rz?dne trzeciego punktu
-        float[] normalna4 = Norm(scianka4, 0, 3, 6);
-        gl.glTexCoord2f(0, 1);
-        gl.glNormal3fv(normalna4, 0);
-        gl.glTexCoord2f(1, 1);
-        gl.glVertex3fv(scianka4, 0);            //wspó?rz?dne 1go punktu 
-        gl.glTexCoord2f(1, 1);
-        gl.glVertex3fv(scianka4, 3);            //wspó?rz?dne 2go punktu 
-        gl.glVertex3fv(scianka4, 6);            //wspó?rz?dne 3go punktu 
+
+        //walec
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUAD_STRIP);
+
+        for (kat3 = (float) (2.0f * Math.PI); kat3 > 0.0f;
+                kat3 -= (Math.PI / 32.0f)) {
+            x = 1.0f * (float) Math.sin(kat3);
+            y = 1.0f * (float) Math.cos(kat3);
+            gl.glNormal3f(x, y, 0.0f);
+            gl.glTexCoord2f(kat3 / 7, 0.0f);
+            gl.glVertex3f(x, y, 2.0f);
+            gl.glTexCoord2f(kat3 / 7, 1.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
         gl.glEnd();
         gl.glFlush();
-        //walec
-// float x,y,kat;
-//gl.glBegin(GL.GL_TRIANGLE_FAN);
-//gl.glVertex3f(0.0f,1.0f, .0f); //?rodek
-//for(kat = 0.0f; kat < (2.0f*Math.PI); kat+=(Math.PI/32.0f))
-//{
-//x = 1.5f*(float)Math.sin(kat);
-//y = 1.5f*(float)Math.cos(kat);
-//gl.glVertex3f(x, 1.0f,y); //kolejne punkty
-//}
-//gl.glEnd();
-//
-//float x1,y1,kat1;
-//gl.glBegin(GL.GL_TRIANGLE_FAN);
-//gl.glVertex3f(0.0f,-1.0f, 0.0f); //?rodek
-//for(kat1 = (float) (2.0f*Math.PI); kat1 > 0.0f; kat1-=(Math.PI/32.0f))
-//{
-//x1 = 1.5f*(float)Math.sin(kat1);
-//y1 = 1.5f*(float)Math.cos(kat1);
-//gl.glVertex3f(x1,-1.0f,y1); //kolejne punkty
-//}
-//gl.glEnd();
-//
-//float x2,y2,kat2;
-//gl.glBegin(GL.GL_QUAD_STRIP);
-//gl.glColor3f(1.0f,0.0f,1.0f);
-//for(kat2 = 0.0f; kat2 < (2.0f*Math.PI); kat2+=(Math.PI/32.0f))
-//{
-//x2 = 1.5f*(float)Math.sin(kat2);
-//y2 = 1.5f*(float)Math.cos(kat2);
-// gl.glVertex3f(x2,1.0f,y2);
-// gl.glVertex3f(x2,-1.0f,y2);//kolejne punkty
-//}
-// gl.glEnd();       // Flush all drawing operations to the graphics card
-        //  gl.glFlush();
-        //drzewko      
     }
 
     void drzewko(GL gl
@@ -506,8 +514,7 @@ public class Adamkiewicz implements GLEventListener {
         gl.glPopMatrix();
     }
 
-    void walec(GL gl
-    ) {
+    void walec(GL gl) {
 //wywo?ujemy automatyczne normalizowanie normalnych
 //bo operacja skalowania je zniekszta?ci
         gl.glEnable(GL.GL_NORMALIZE);
